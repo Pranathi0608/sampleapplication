@@ -1,4 +1,3 @@
-//Jenkins file only to tutorial example
 pipeline {
   agent any
     
@@ -6,19 +5,27 @@ pipeline {
     
   stages {
         
-    stage('Cloning Git') {
+    stage('Git') {
       steps {
-        git 'https://github.com/Pranathi0608/sampleapplication.git'
-      }
-    }
-        
-    stage('Install dependencies') {
-      steps {
-        sh 'npm install'
+        git 'https://github.com/Pranathi0608/simple-node-js-react-npm-app.git'
       }
     }
      
+    stage('Build') {
+      steps {
+        sh 'npm install'
+         sh '<<Build Command>>'
+      }
+    }  
+    
+            
     stage('Test') {
+      steps {
+        sh 'node test'
+      }
+    }
+  }
+}
       steps {
          sh 'npm test'
       }
